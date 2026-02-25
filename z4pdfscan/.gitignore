@@ -1,0 +1,44 @@
+# Xcode
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.moved-aside
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# CocoaPods (if ever used)
+Pods/
+
+# macOS
+.DS_Store
+*.swp
+*~
+._*
+
+# IDE
+*.xcscmblueprint
+*.xccheckout
+.idea/
+*.iml
+
+# Provisioning profiles
+*.mobileprovision
+*.provisionprofile
+
+# Crash logs
+*.ips
+*.crash
+
+# App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
