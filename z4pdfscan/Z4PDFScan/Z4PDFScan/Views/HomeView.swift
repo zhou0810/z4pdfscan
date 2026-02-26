@@ -14,11 +14,21 @@ struct HomeView: View {
             ZStack(alignment: .bottomTrailing) {
                 List {
                     if homeVM.folders.isEmpty {
-                        ContentUnavailableView(
-                            "No Folders",
-                            systemImage: "folder",
-                            description: Text("Tap + to create a folder, then scan your documents.")
-                        )
+                        VStack(spacing: 12) {
+                            Image(systemName: "folder")
+                                .font(.largeTitle)
+                                .foregroundStyle(.secondary)
+                            Text("No Folders")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            Text("Tap + to create a folder, then scan your documents.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 60)
+                        .listRowBackground(Color.clear)
                     } else {
                         ForEach(homeVM.folders) { folder in
                             NavigationLink(value: folder) {

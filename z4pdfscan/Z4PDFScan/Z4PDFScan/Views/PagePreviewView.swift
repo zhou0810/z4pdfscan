@@ -11,11 +11,18 @@ struct PagePreviewView: View {
     var body: some View {
         ScrollView {
             if scannerVM.pages.isEmpty {
-                ContentUnavailableView(
-                    "No Pages",
-                    systemImage: "doc.on.doc",
-                    description: Text("Scanned pages will appear here.")
-                )
+                VStack(spacing: 12) {
+                    Image(systemName: "doc.on.doc")
+                        .font(.largeTitle)
+                        .foregroundStyle(.secondary)
+                    Text("No Pages")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    Text("Scanned pages will appear here.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity)
                 .padding(.top, 100)
             } else {
                 LazyVGrid(columns: columns, spacing: 12) {

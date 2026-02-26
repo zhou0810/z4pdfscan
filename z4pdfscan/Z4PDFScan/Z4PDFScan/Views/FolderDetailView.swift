@@ -9,11 +9,21 @@ struct FolderDetailView: View {
     var body: some View {
         List {
             if pdfURLs.isEmpty {
-                ContentUnavailableView(
-                    "No Documents",
-                    systemImage: "doc",
-                    description: Text("Scan documents and save them to this folder.")
-                )
+                VStack(spacing: 12) {
+                    Image(systemName: "doc")
+                        .font(.largeTitle)
+                        .foregroundStyle(.secondary)
+                    Text("No Documents")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    Text("Scan documents and save them to this folder.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 60)
+                .listRowBackground(Color.clear)
             } else {
                 ForEach(pdfURLs, id: \.self) { url in
                     Button {

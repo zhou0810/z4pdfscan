@@ -8,10 +8,14 @@ struct FolderPickerView: View {
     @State private var showNewFolderAlert = false
     @State private var newFolderName = ""
 
+    private var folderList: [AppFolder] {
+        homeVM.folders
+    }
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach(homeVM.folders) { folder in
+                ForEach(folderList) { (folder: AppFolder) in
                     Button {
                         selectedFolder = folder
                         dismiss()
@@ -24,7 +28,7 @@ struct FolderPickerView: View {
                             Spacer()
                             if selectedFolder?.id == folder.id {
                                 Image(systemName: "checkmark")
-                                    .foregroundStyle(.accentColor)
+                                    .foregroundStyle(Color.accentColor)
                             }
                         }
                     }
