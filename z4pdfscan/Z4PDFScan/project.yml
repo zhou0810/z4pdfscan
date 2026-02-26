@@ -13,10 +13,10 @@ targets:
       - Z4PDFScan
     settings:
       base:
-        INFOPLIST_FILE: Z4PDFScan/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "1,2"
         PRODUCT_BUNDLE_IDENTIFIER: com.zhou0810.Z4PDFScan
-        GENERATE_INFOPLIST_FILE: false
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSCameraUsageDescription: "Z4PDFScan needs camera access to scan documents."
