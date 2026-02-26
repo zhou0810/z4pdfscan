@@ -8,6 +8,7 @@ struct HomeView: View {
     @State private var showNewFolderAlert = false
     @State private var newFolderName = ""
     @State private var navigateToPreview = false
+    @State private var pendingNavigation = false
 
     var body: some View {
         NavigationStack {
@@ -53,6 +54,13 @@ struct HomeView: View {
                     FolderDetailView(folder: folder)
                 }
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        NavigationLink {
+                            SettingsView()
+                        } label: {
+                            Image(systemName: "gearshape")
+                        }
+                    }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             newFolderName = ""
@@ -85,12 +93,17 @@ struct HomeView: View {
                 }
                 .padding(24)
             }
-            .sheet(isPresented: $showScanner) {
+            .sheet(isPresented: $showScanner, onDismiss: {
+                if pendingNavigation {
+                    pendingNavigation = false
+                    navigateToPreview = true
+                }
+            }) {
                 DocumentCameraView(
                     onScanCompleted: { images in
-                        showScanner = false
                         scannerVM.addScannedImages(images)
-                        navigateToPreview = true
+                        pendingNavigation = true
+                        showScanner = false
                     },
                     onCancelled: {
                         showScanner = false

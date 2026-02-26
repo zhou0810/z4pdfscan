@@ -25,6 +25,10 @@
 		E6AAD75EB5DB8AD9A3203BF9 /* Z4PDFScanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841D405519C20F9035699B4 /* Z4PDFScanApp.swift */; };
 		E8F8481E5A854B41C5973E3F /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F51A45DF53221E4B30A6E7 /* ScannerViewModel.swift */; };
 		EF045BE5243B866A8A473773 /* DocumentExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1499A559B0F65AE8822A943E /* DocumentExportView.swift */; };
+		1A2B3C4D5E6F7A8B9C0D1E2F /* ClaudeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF66 /* ClaudeAPIService.swift */; };
+		2B3C4D5E6F7A8B9C0D1E2F3A /* TextPDFService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22CC33DD44EE55FF660011 /* TextPDFService.swift */; };
+		3C4D5E6F7A8B9C0D1E2F3A4B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33DD44EE55FF66001122AA /* SettingsViewModel.swift */; };
+		4D5E6F7A8B9C0D1E2F3A4B5C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44EE55FF66001122AABB33 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		E0FDA4D9FCAA6EEB62D75502 /* FolderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailView.swift; sourceTree = "<group>"; };
 		E9F51A45DF53221E4B30A6E7 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		F841D405519C20F9035699B4 /* Z4PDFScanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Z4PDFScanApp.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF66 /* ClaudeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAPIService.swift; sourceTree = "<group>"; };
+		BB22CC33DD44EE55FF660011 /* TextPDFService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPDFService.swift; sourceTree = "<group>"; };
+		CC33DD44EE55FF66001122AA /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		DD44EE55FF66001122AABB33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -57,6 +65,7 @@
 				567620950E8461D27C9C0C61 /* HomeViewModel.swift */,
 				AF2DDEAF45D295880C82006E /* SaveViewModel.swift */,
 				E9F51A45DF53221E4B30A6E7 /* ScannerViewModel.swift */,
+				CC33DD44EE55FF66001122AA /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -86,9 +95,11 @@
 		51E14B7D771ED1ADB4E30E10 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AA11BB22CC33DD44EE55FF66 /* ClaudeAPIService.swift */,
 				3CF2910C990AE08C30E61169 /* FileManagerService.swift */,
 				63A0F32D456F3857B0D1A2C8 /* ImageProcessingService.swift */,
 				9502B77402E90A411DED8400 /* PDFGenerationService.swift */,
+				BB22CC33DD44EE55FF660011 /* TextPDFService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -121,6 +132,7 @@
 				0EF079838CEBFB907F70D120 /* HomeView.swift */,
 				D27F3AA6B5F2CFCBCE6370A1 /* PagePreviewView.swift */,
 				DF730EEE4351C8EBC837292D /* SaveDocumentView.swift */,
+				DD44EE55FF66001122AABB33 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7295EACCB204A8D1E82B0A6 /* AppFolder.swift in Sources */,
+				1A2B3C4D5E6F7A8B9C0D1E2F /* ClaudeAPIService.swift in Sources */,
 				21E98D982440E888291C07DC /* DocumentCameraView.swift in Sources */,
 				EF045BE5243B866A8A473773 /* DocumentExportView.swift in Sources */,
 				880C025257DAA3C7E618DEF1 /* FileManagerService.swift in Sources */,
@@ -212,6 +225,9 @@
 				DB43F005691A295287DA9757 /* SaveViewModel.swift in Sources */,
 				DEF1F45BDFD6B378DEF72664 /* ScannedPage.swift in Sources */,
 				E8F8481E5A854B41C5973E3F /* ScannerViewModel.swift in Sources */,
+				3C4D5E6F7A8B9C0D1E2F3A4B /* SettingsViewModel.swift in Sources */,
+				4D5E6F7A8B9C0D1E2F3A4B5C /* SettingsView.swift in Sources */,
+				2B3C4D5E6F7A8B9C0D1E2F3A /* TextPDFService.swift in Sources */,
 				E6AAD75EB5DB8AD9A3203BF9 /* Z4PDFScanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

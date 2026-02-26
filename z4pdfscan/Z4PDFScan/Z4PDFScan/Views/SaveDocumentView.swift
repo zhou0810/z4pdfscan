@@ -9,6 +9,11 @@ struct SaveDocumentView: View {
     @State private var showFolderPicker = false
     @State private var showExportPicker = false
     @State private var showSavedAlert = false
+    @State private var showErrorAlert = false
+
+    private var isAPIKeySet: Bool {
+        !SettingsViewModel.storedAPIKey().isEmpty
+    }
 
     var body: some View {
         Form {
@@ -17,13 +22,39 @@ struct SaveDocumentView: View {
                     .textInputAutocapitalization(.words)
             }
 
-            Section("Resolution") {
-                Picker("Quality", selection: $saveVM.selectedResolution) {
-                    ForEach(ResolutionOption.allCases) { option in
-                        Text(option.rawValue).tag(option)
+            Section {
+                Toggle("AI Text PDF", isOn: $saveVM.useClaudeOCR)
+                    .disabled(!isAPIKeySet)
+                if !isAPIKeySet {
+                    Text("Add your Claude API key in Settings to enable.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                if !saveVM.processingStatus.isEmpty {
+                    HStack(spacing: 8) {
+                        ProgressView()
+                        Text(saveVM.processingStatus)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .pickerStyle(.segmented)
+            } header: {
+                Text("AI Text Extraction")
+            } footer: {
+                if isAPIKeySet {
+                    Text("Uses Claude to extract text and generate a selectable-text PDF.")
+                }
+            }
+
+            if !saveVM.useClaudeOCR {
+                Section("Resolution") {
+                    Picker("Quality", selection: $saveVM.selectedResolution) {
+                        ForEach(ResolutionOption.allCases) { option in
+                            Text(option.rawValue).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
             }
 
             Section("Destination Folder") {
@@ -49,7 +80,11 @@ struct SaveDocumentView: View {
 
             Section {
                 Button {
-                    saveVM.save(pages: scannerVM.pages)
+                    if saveVM.useClaudeOCR {
+                        saveVM.saveWithOCR(pages: scannerVM.pages)
+                    } else {
+                        saveVM.save(pages: scannerVM.pages)
+                    }
                 } label: {
                     HStack {
                         Spacer()
@@ -65,7 +100,11 @@ struct SaveDocumentView: View {
                 .disabled(saveVM.selectedFolder == nil || saveVM.isSaving || saveVM.documentName.isEmpty)
 
                 Button {
-                    saveVM.generateExportPDF(pages: scannerVM.pages)
+                    if saveVM.useClaudeOCR {
+                        saveVM.exportWithOCR(pages: scannerVM.pages)
+                    } else {
+                        saveVM.generateExportPDF(pages: scannerVM.pages)
+                    }
                 } label: {
                     HStack {
                         Spacer()
@@ -83,6 +122,16 @@ struct SaveDocumentView: View {
         }
         .navigationTitle("Save Document")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if saveVM.selectedFolder == nil {
+                let folders = FileManagerService.listFolders()
+                if folders.isEmpty {
+                    saveVM.selectedFolder = FileManagerService.createFolder(name: "Default")
+                } else {
+                    saveVM.selectedFolder = folders.first
+                }
+            }
+        }
         .sheet(isPresented: $showFolderPicker) {
             FolderPickerView(selectedFolder: $saveVM.selectedFolder)
         }
@@ -110,6 +159,18 @@ struct SaveDocumentView: View {
             }
         } message: {
             Text("Document saved successfully.")
+        }
+        .onChange(of: saveVM.ocrError) { newValue in
+            if newValue != nil {
+                showErrorAlert = true
+            }
+        }
+        .alert("Error", isPresented: $showErrorAlert) {
+            Button("OK") {
+                saveVM.ocrError = nil
+            }
+        } message: {
+            Text(saveVM.ocrError ?? "An unknown error occurred.")
         }
     }
 }
