@@ -20,3 +20,6 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.zhou0810.Z4PDFScan
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_NSCameraUsageDescription: "Z4PDFScan needs camera access to scan documents."
+        DEVELOPMENT_TEAM: Y84Z25C7RJ
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "Apple Development"
